@@ -1,0 +1,29 @@
+#root {
+  /* max-width: 1280px; */
+  height: 50px;
+  /* margin: 0 auto; */
+  background-color: blue;
+}
+
+.title {
+  margin: 20px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.loader,
+.error {
+  display: flex;
+  justify-content: center;
+}
+.btn {
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    height: 35px;
+    margin: 0 auto;
+    gap: 5px;
+}
+
