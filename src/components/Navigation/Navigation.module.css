@@ -1,0 +1,11 @@
+.nav {
+    display: flex;
+    gap: 5px;
+}
+.link {
+    font-size: 16px;
+    font-weight: 600;
+}
+.isActive {
+color: orangered; 
+}
