@@ -1,10 +1,11 @@
 .container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
+    gap: 26px;
+    /* row-gap: 100px;
+    column-gap: 26px; */
     justify-content: center;
 }
 .item {
-   width: 244px;
+    width: 300px
 }

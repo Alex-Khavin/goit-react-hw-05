@@ -1,89 +1,39 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { lazy, Suspense } from 'react';
 import './App.css'
-// import ImageGallery from './ImageGallery/ImageGallery'
-// import SearchBar from './SearchBar/SearchBar'
-// import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn'
-// import ImageModal from './ImageModal/ImageModal'
-// import Loader from './Loader/Loader'
-// import ErrorMessage from './ErrorMessage/ErrorMessage'
 
-import { Routes, Route, NavLink } from 'react-router-dom'
-import HomePage from '../pages/HomePage/HomePage'
-import MoviesPage from '../pages/MoviesPage/MoviesPage'
-import NotFoundPage from '../pages/NotFoundPage/NotFoundPage'
-// import MovieDetailsPage from '../pages/MovieDetailsPage'
-import Navigation from "./Navigation/Navigation"
+import { Routes, Route } from 'react-router-dom';
+// import HomePage from '../pages/HomePage/HomePage';
+// import MoviesPage from '../pages/MoviesPage/MoviesPage';
+// import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
+// import MovieDetailsPage from '../pages/MovieDetailsPage/MovieDetailsPage';
+import Navigation from "./Navigation/Navigation";
+import MovieCast from './MovieCast/MovieCast';
+import MovieReviews from './MovieReviews/MovieReviews';
+
+const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const MoviesPage = lazy(() => import('../pages/MoviesPage/MoviesPage'));
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage'));
+const MovieDetailsPage = lazy(() => import('../pages/MovieDetailsPage/MovieDetailsPage'));
 
 
 export default function App() {
-//   const [images, setImages] = useState([]);
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [isError, setIsError] = useState(false);
-
-//   const [newImages, setNewImages] = useState("");
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const [totalPages, setTotalPages] = useState(0);
-
-//   const [modalIsOpen, setIsOpen] = useState(false);
-//   const [selectedImage, setSelectedImage] = useState(null);
-
-//   function openModal(imageUrl) {
-//     setSelectedImage(imageUrl);
-//     setIsOpen(true);
-//   }
-
-//   function closeModal() {
-//     setIsOpen(false);
-//   }
-
-//   const handleSearch = (searchImage) => {
-//     setNewImages(searchImage);
-//     setCurrentPage(1);
-//     setImages([]);
-//   }
-
-//   const incrementPage = () => {
-//     setCurrentPage(currentPage + 1)
-//   }
-
-//   useEffect(() => {
-//     if (newImages === "") {
-//       return;
-//     }
-
-//     async function fetchData () {
-//       try {
-//       setIsError(false);
-//       setIsLoading(true);
-//       const response = await axios.get(`https://api.unsplash.com/search/photos?orientation=landscape&query=${newImages}&per_page=20&page=${currentPage}&client_id=cBBnwbD5wpzxm6ywVyoTQvzfHHdG4tfE2bLgX1r6v2Y`);
-//         setImages((prevImages) => [...prevImages, ...response.data.results]);
-//         setTotalPages(response.data.total_pages);
-//     } catch {
-//       setIsError(true);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//     }
-
-//     fetchData (newImages, currentPage)
-
-// }, [newImages, currentPage])
 
   return (
     <>
       <div className='container'>
         <Navigation />
         
-        <Routes>
+        <Suspense fallback={null}>
+         <Routes>
           <Route path="/" element={<HomePage/>} />
           <Route path="/movies" element={<MoviesPage/>} />
-          {/* <Route path="/movies/:movieId" element={<MovieDetailsPage/>}>
-            <Route path="cast" element={"<MovieCast/>"} />
-            <Route path="reviews" element={"<MovieReviews/>"} />
-          </Route> */}
+          <Route path="/movies/:movieId" element={<MovieDetailsPage/>}>
+            <Route path="cast" element={<MovieCast/>} />
+            <Route path="reviews" element={<MovieReviews/>} />
+          </Route>
           <Route path="*" element={<NotFoundPage/>}/>
-        </Routes>
+          </Routes>
+        </Suspense>
 {/* 
         <SearchBar onSearch={handleSearch} />
         {isError && <ErrorMessage/>}

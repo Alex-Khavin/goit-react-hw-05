@@ -1,5 +1,8 @@
+import css from './HomePage.module.css'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import MovieList from '../../components/MovieList/MovieList';
 
 export default function HomePage() {
     const [movies, setMovies] = useState([]);
@@ -33,17 +36,22 @@ export default function HomePage() {
 
    
     return (
-        <div>
-            {isError && { isError }}
+        <div className={css.container}>
+            {isError && <p>Something went wrong</p>}
             {isLoading && <strong>Loading...</strong>}
-            <ul>
+            <p className={css.text}>Trading today:</p>
+            {movies.length > 0 && (<MovieList movies={movies} />)}
+
+
+            {/* {movies.length > 0 && (
+                <ul>
                 {movies.map(movie => (
                     <li key={movie.id}>
-                        <a href="#">{movie.title}</a>
+                        <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
                     </li>
                 )
                 )}
-            </ul>
+            </ul>)} */}
         </div>
     )
 }

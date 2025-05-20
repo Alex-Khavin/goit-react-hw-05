@@ -15,6 +15,7 @@ export default function Navigation() {
                     <NavLink to="/movies" className={isActiveClass}>Movies</NavLink>
                 </nav>
             </header>
+            <hr/>
         </div>
     )
 }
