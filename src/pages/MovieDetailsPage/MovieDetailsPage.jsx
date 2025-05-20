@@ -12,14 +12,13 @@ export default function MovieDetailsPage() {
     const location = useLocation();
     const backLocationRef = useRef(location.state);
     
+    useEffect(() => {
     const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
     const options = {
   headers: {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiODIwMmFlNDgwNzk1YWExNjNkODYzZDdiNmQ1YWMyMSIsIm5iZiI6MTc0NzQ3NTYzNC40NDcsInN1YiI6IjY4Mjg1Y2IyM2I0MjMyOWY5OThiZmRhZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3XuoYUqnz_MW4wiLQ9U_HNGBd17UFrV3v27av6_l0Oo'
   }
     };
-    
-    useEffect(() => {
         async function fetchData() {
             try {
                 setIsError(false);
